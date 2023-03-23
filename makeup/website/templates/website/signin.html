@@ -1,0 +1,13 @@
+<form method="post">
+    {% csrf_token %}
+        <label for="">Username</label>
+        <input type="text" id="username" name="name" placeholder="Enter Your username" Required>
+        <br>
+
+        <label for="">Password</label>
+        <input type="password" id="pass1" name="pass1" placeholder="Create Your Password" Required>
+        <br>
+
+    {{ form.as_p }}
+    <button type="submit">Sign in</button>
+  </form>

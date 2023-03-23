@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PGF</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/pgf.png' %}" />
+    <!--css-->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" />
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <!--aos-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!--gsap-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <!--boxicons-->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <!--fontaweso-->
+    <script
+      src="https://kit.fontawesome.com/8feaa5fbd6.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-black">
+    <div class="container-fluid bg-black fixed-top">
+      <div class="container-fluid" style="display: flex">
+        <div class="container text-center mx-auto">
+          <a class="navbar-brand mx-auto" href="#">
+            <img
+              src="{% static 'images/pgf.png' %}"
+              alt="logo"
+              style="width: 5em; height: auto"
+              id="logo"
+              class="mt-2"
+            />
+          </a>
+        </div>
+        <div class="icons mt-3" style="display: flex">
+          <div class="search">
+            <div class="icon">
+              <i
+                class="fa-solid fa-magnifying-glass"
+                style="color: white; font-size: 1.2em"
+                title="search"
+              >
+              </i>
+            </div>
+
+            <div class="input">
+              <input type="text" placeholder="Search" id="mysearch" />
+              <span
+                class="clear"
+                onclick="document.getElementById('mysearch').value ='' "
+              >
+              </span>
+            </div>
+          </div>
+
+          <a href="#">
+            <i
+              class="fa-solid fa-user mx-1 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="account"
+            >
+            </i
+          ></a>
+          <a href="#">
+            <i
+              class="fa-solid fa-cart-shopping mx-2 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="cart"
+            >
+            </i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg mt-5 bg-black mx-auto">
+      <div class="container-fluid mt-3">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+            <li class="nav-item">
+              <a
+                class="nav-link mx-4"
+                aria-current="page"
+                href="#"
+                style="color: white"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white">
+                About Us
+              </a>
+            </li>
+            <li class="nav-item dropdown bg-black">
+              <a
+                class="nav-link dropdown-toggle mx-4 bg-black"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="color: white"
+              >
+                Services
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Manual Makeup</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>HD Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>Signature Bridal Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>Glass Skin Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>Waterproof Bridal Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white"> Blogs </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white">
+                Portfolio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="{% url 'contact' %}" style="color: white"
+                >Contact Us
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="box" style="background-color: black">
+        <video width="100%" height="100%" autoplay muted loop>
+          <source
+            src="{% static 'images/beauty-concept-cosmetic-brushes-with-pink-cosmeti-2022-08-04-14-49-10-utc(1).mp4' %}"
+            type="video/mp4"
+          />
+        </video>
+        <div
+          class="center d-none d-sm-block"
+          style="
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          "
+        >
+          <p style="color: white">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
+            assumenda excepturi, neque itaque repudiandae voluptate porro magni
+            nemo earum ad vel ut reiciendis ea iusto. Tempora aperiam porro
+            pariatur nihil.
+          </p>
+          <button class="button">KNOW MORE</button>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="{% static 'images/2.jpg' %}" class="img-fluid" />
+        <div
+          class="center d-none d-sm-block"
+          style="
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          "
+        >
+          <p style="color: white">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
+            assumenda excepturi, neque itaque repudiandae voluptate porro magni
+            nemo earum ad vel ut reiciendis ea iusto. Tempora aperiam porro
+            pariatur nihil.
+          </p>
+          <button class="button">KNOW MORE</button>
+        </div>
+      </div>
+      <div class="box">
+        <img src="{% static 'images/1.jpg' %}" class="img-fluid" />
+        <div
+          class="center d-none d-sm-block"
+          style="
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          "
+        >
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
+            assumenda excepturi, neque itaque repudiandae voluptate porro magni
+            nemo earum ad vel ut reiciendis ea iusto. Tempora aperiam porro
+            pariatur nihil.
+          </p>
+          <button class="button">KNOW MORE</button>
+        </div>
+      </div>
+      <div class="box">
+        <img src="{% static 'images/2.jpg' %}" class="img-fluid" />
+        <div
+          class="center d-none d-sm-block"
+          style="
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          "
+        >
+          <p style="color: white">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
+            assumenda excepturi, neque itaque repudiandae voluptate porro magni
+            nemo earum ad vel ut reiciendis ea iusto. Tempora aperiam porro
+            pariatur nihil.
+          </p>
+          <button class="button">KNOW MORE</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid bg-black">
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col-sm-4" style="color: white">
+            <h1 style="margin-left: 0.7em">Explore</h1>
+            <ul style="list-style: none">
+              <a href="#" style="text-decoration: none; color: white">
+                <li>
+                  <p>About Us</p>
+                </li>
+              </a>
+              <a href="#" style="text-decoration: none; color: white">
+                <li>
+                  <p>Services</p>
+                </li>
+              </a>
+              <a href="#" style="text-decoration: none; color: white">
+                <li>
+                  <p>Blogs</p>
+                </li>
+              </a>
+              <a href="#" style="text-decoration: none; color: white">
+                <li>
+                  <p>Portfolio</p>
+                </li>
+              </a>
+              <a href="{% url 'contact' %}" style="text-decoration: none; color: white">
+                <li>
+                  <p>Contact Us</p>
+                </li>
+              </a>
+            </ul>
+          </div>
+          <div class="col-sm-4">
+            <h1 style="color: white">Connect With Us</h1>
+            <div class="container-fluid mx-5">
+              <a href="#" style="text-decoration: none; color: white">
+                <i
+                  class="fa-brands fa-instagram mx-2"
+                  style="font-size: 2em"
+                ></i>
+              </a>
+              <a href="#" style="text-decoration: none; color: white">
+                <i class="fa-brands fa-twitter mx-2" style="font-size: 2em"></i>
+              </a>
+              <a href="#" style="text-decoration: none; color: white">
+                <i class="fa-brands fa-facebook" style="font-size: 2em"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      const icon = document.querySelector(".icon");
+      const search = document.querySelector(".search");
+      icon.onclick = function () {
+        search.classList.toggle("active");
+      };
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const logo = document.getElementById("logo");
+      window.addEventListener("scroll", function () {
+        // get the current scroll position
+        const scrollPosition = window.scrollY;
+
+        // calculate the new size of the container
+        const newWidth = 90 + scrollPosition * 0.1;
+        const newHeight = 60 + scrollPosition * 0.1;
+
+        // limit the amount of scaling that occurs
+        if (newWidth > 150) {
+          newWidth = 200;
+          newHeight = 200;
+        }
+
+        // use GSAP to animate the logo's size and position
+        gsap.to(logo, {
+          duration: 0.5,
+          width: newWidth,
+          height: newHeight,
+          // ease: "power2.out",
+        });
+      });
+    </script>
+  </body>
+</html>

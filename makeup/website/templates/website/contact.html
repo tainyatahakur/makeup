@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/pgf.png' %}" />
+    <!--css-->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/contact.css' %}" rel="stylesheet" />
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <!--fontaweso-->
+    <script
+      src="https://kit.fontawesome.com/8feaa5fbd6.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container-fluid bg-black fixed-top">
+      <div class="container-fluid" style="display: flex">
+        <div class="container text-center mx-auto">
+          <a class="navbar-brand mx-auto" href="#">
+            <img
+              src="{% static 'images/pgf.png' %}"
+              alt="logo"
+              style="width: 5em; height: auto"
+              id="logo"
+              class="mt-2"
+            />
+          </a>
+        </div>
+        <div class="icons mt-3" style="display: flex">
+          <div class="search">
+            <div class="icon">
+              <i
+                class="fa-solid fa-magnifying-glass"
+                style="color: white; font-size: 1.2em"
+                title="search"
+              >
+              </i>
+            </div>
+
+            <div class="input">
+              <input type="text" placeholder="Search" id="mysearch" />
+              <span
+                class="clear"
+                onclick="document.getElementById('mysearch').value ='' "
+              >
+              </span>
+            </div>
+          </div>
+
+          <a href="#">
+            <i
+              class="fa-solid fa-user mx-1 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="account"
+            >
+            </i
+          ></a>
+          <a href="#">
+            <i
+              class="fa-solid fa-cart-shopping mx-2 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="cart"
+            >
+            </i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg mt-5 bg-black mx-auto">
+      <div class="container-fluid mt-3">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+            <li class="nav-item">
+              <a
+                class="nav-link mx-4"
+                aria-current="page"
+                href="{% url 'index' %}"
+                style="color: white"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white">
+                About Us
+              </a>
+            </li>
+            <li class="nav-item dropdown bg-black">
+              <a
+                class="nav-link dropdown-toggle mx-4 bg-black"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="color: white"
+              >
+                Services
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Manual Makeup</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>HD Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>Signature Bridal Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>Glass Skin Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#"></a>Waterproof Bridal Makeup</li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                </li> 
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white"> Blogs </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white">
+                Portfolio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white"
+                >Contact Us
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="container text-center mx-auto mt-5">
+        <h1
+          className="text-center"
+          data-scroll
+          data-scroll-speed="-2"
+          data-scroll-direction="horizontal"
+          style="color: palevioletred"
+        >
+          Contact Us
+        </h1>
+      </div>
+      <div class="container mt-5">
+        <div class="row g-3">
+          <div class="col-sm-6 text-center mt-5" style="color: palevioletred">
+            <h3><i class="fa-solid fa-location-arrow"></i> Our Studio</h3>
+            <p></p>
+            <br />
+            <h3><i class="fa-solid fa-envelopes-bulk mx-1"></i>Mail</h3>
+            <p></p>
+            <br />
+            <h3><i class="fa-solid fa-phone mx-1"></i>Call Us</h3>
+            <p></p>
+            <br />
+          </div>
+          <div class="col-sm-6" style="color: palevioletred">
+            <form class="row g-3 needs-validation mt-4" novalidate action="" method="POST">
+              {% csrf_token %}
+            <div class="row g-3">
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control mt-4"
+                  placeholder="First Name"
+                  aria-label="Name"
+                  name="fname"
+                  style="border: 1px solid palevioletred"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control mt-4"
+                  placeholder="last name"
+                  aria-label="Name"
+                  name="lname"
+                  style="border: 1px solid palevioletred"
+                />
+              </div>
+
+              <div class="col-sm-12">
+                <input
+                  type="text"
+                  class="form-control mt-4"
+                  placeholder="Email"
+                  aria-label="Email"
+                  name="email"
+                  style="border: 1px solid palevioletred"
+                />
+              </div>
+              <div class="form-floating mt-4">
+                <textarea
+                  class="form-control mt-3"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea"
+                  name="message"
+                  style="border: 1px solid palevioletred"
+                ></textarea>
+                <label for="floatingTextarea">Message</label>
+              </div>
+              <div class="container text-center mt-3">
+                <button class="button" type ="submit">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </form>
+    </div>
+
+    <div class="container-fluid mt-5">
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col-sm-4" style="color: rgb(255, 255, 255)">
+            <h1 style="margin-left: 0.7em">Explore</h1>
+            <ul style="list-style: none">
+              <a
+                href="#"
+                style="
+                  text-decoration: none;
+                  color: rgb(255, 255, 255);
+                  font-size: 1.4em;
+                  font-weight: 600;
+                "
+              >
+                <li>
+                  <p>About Us</p>
+                </li>
+              </a>
+              <a
+                href="#"
+                style="
+                  text-decoration: none;
+                  color: rgb(255, 255, 255);
+                  font-size: 1.4em;
+                  font-weight: 600;
+                "
+              >
+                <li>
+                  <p>Services</p>
+                </li>
+              </a>
+              <a
+                href="#"
+                style="
+                  text-decoration: none;
+                  color: rgb(255, 255, 255);
+                  font-size: 1.4em;
+                  font-weight: 600;
+                "
+              >
+                <li>
+                  <p>Blogs</p>
+                </li>
+              </a>
+              <a
+                href="#"
+                style="
+                  text-decoration: none;
+                  color: rgb(255, 255, 255);
+                  font-size: 1.4em;
+                  font-weight: 600;
+                "
+              >
+                <li>
+                  <p>Portfolio</p>
+                </li>
+              </a>
+              <a
+                href="#"
+                style="
+                  text-decoration: none;
+                  color: rgb(255, 255, 255);
+                  font-size: 1.4em;
+                  font-weight: 600;
+                "
+              >
+                <li>
+                  <p>Contact Us</p>
+                </li>
+              </a>
+            </ul>
+          </div>
+          <div class="col-sm-4">
+            <h1 style="color: rgb(255, 255, 255)">Connect With Us</h1>
+            <div class="container-fluid mx-5">
+              <a
+                href="#"
+                style="text-decoration: none; color: rgb(255, 255, 255)"
+              >
+                <i
+                  class="fa-brands fa-instagram mx-2"
+                  style="font-size: 2em"
+                ></i>
+              </a>
+              <a
+                href="#"
+                style="text-decoration: none; color: rgb(255, 254, 254)"
+              >
+                <i class="fa-brands fa-twitter mx-2" style="font-size: 2em"></i>
+              </a>
+              <a
+                href="#"
+                style="text-decoration: none; color: rgb(255, 255, 255)"
+              >
+                <i class="fa-brands fa-facebook" style="font-size: 2em"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
