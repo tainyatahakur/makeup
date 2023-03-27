@@ -145,3 +145,5 @@ def appointment(request):
     time = request.POST.get('time')
     # return HttpResponse('Appointment booked successfully!')
     return render(request, 'website/appointment.html')
+
+
