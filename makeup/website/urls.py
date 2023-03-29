@@ -11,5 +11,8 @@ path('booking/', views.booking, name ='booking'),
 # path('search/', views.search, name = 'search'),
 path('services/', views.services, name = 'services'),
 path('appointment/', views.appointment, name = 'appointment'),
+# path('portfolio/', views.portfolio, name = 'portfolio'),
+
+
 
 ]       

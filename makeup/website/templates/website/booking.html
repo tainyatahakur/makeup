@@ -1,42 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/pgf.png' %}" />
+    <!--css-->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/booking.css' %}" rel="stylesheet"/>
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script src="{% static 'js/city.js' %}"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    /> 
+    <!--aos-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!--gsap-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <!--phone number-->
+    <link href="{% static 'build/css/demo.css' %}" rel="stylesheet" />
+    <link href="{% static 'build/css/intlTelInput.css' %}" rel="stylesheet" />
+    <!--boxicons-->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <!--fontaweso-->
+    <script
+      src="https://kit.fontawesome.com/8feaa5fbd6.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  </head>
+  <body>
+  
+    <div class="container-fluid bg-black fixed-top">
+      <div class="container-fluid" style="display: flex">
+        <div class="container text-center mx-auto">
+          <a class="navbar-brand mx-auto" href="#">
+            <img
+              src="{% static 'images/pgf.png' %}"
+              alt="logo"
+              style="width: 5em; height: auto"
+              id="logo"
+              class="mt-2"
+            />
+          </a>
+        </div>
+        <div class="icons mt-3" style="display: flex">
+          <div class="search">
+            <div class="icon">
+              <i
+                class="fa-solid fa-magnifying-glass"
+                style="color: white; font-size: 1.2em"
+                title="search"
+              >
+              </i>
+            </div>
 
-</head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
+            <div class="input">
+              <input type="text" placeholder="Search" id="mysearch" />
+              <span
+                class="clear"
+                onclick="document.getElementById('mysearch').value ='' "
+              >
+              </span>
+            </div>
+          </div>
 
-        <label for="">Username</label>
-        <input type="text" id="username" name="username" placeholder="Create a username(only letters and numbers)" Required>
-         <br>
+          <a href="#">
+            <i
+              class="fa-solid fa-user mx-1 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="account"
+            >
+            </i
+          ></a>
+          <a href="#">
+            <i
+              class="fa-solid fa-cart-shopping mx-2 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="cart"
+            >
+            </i
+          ></a>
+        </div>
+      </div>
+    </div>
 
-         <label for="">First Name</label>
-        <input type="text" id="fname" name="fname" placeholder="Enter your  first name" Required>
-         <br>
+    <nav class="navbar navbar-expand-lg mt-5 bg-black mx-auto">
+      <div class="container-fluid mt-3">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+            <li class="nav-item">
+              <a
+                class="nav-link mx-4"
+                aria-current="page"
+                href="{% url 'index' %}"
+                style="color: white"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white">
+                About Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white">
+                Services
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white"> Blogs </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="#" style="color: white">
+                Portfolio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="{% url 'contact' %}" style="color: white"
+                >Contact Us
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-         <label for="">Last Name</label>
-        <input type="text" id="lname" name="lname" placeholder=" Enter your last name" Required>
-         <br>
+    <div class="container-fluid" style="color: white">
+      <div class="container-fluid text-center mt-5">
+        <h1>Experience Now</h1>
+      </div>
+      <div
+        class="container mt-5"
+        style="
+          border: 1px solid rgb(255, 255, 255);
+          padding: 1em 1em 1em;
+          border-radius: 10px;
+        "
+      >
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="{% static 'images/2.jpg' %}"  class="img-fluid" />
+          </div>
+          <div class="col-sm-6">
+            <form class="row g-3 needs-validation" action="" method="post" novalidate>
+                {% csrf_token %}
+              <div class="col-md-6">
+                <label for="validationCustom01" class="form-label"
+                  >First name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom01"
+                  
+                  name ="fname"
+                  required
+                />
+              
+              </div>
+              <div class="col-md-6">
+                <label for="validationCustom02" name ='lname' class="form-label"
+                  >Last name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom02"
+                 
+                  name = "lname"
+                  required
+                />
+               
+              </div>
+              <div class="col-md-12">
+                <label for="validationCustom03" class="form-label"
+                  >Address</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom03"
+                  name ="address"
+                  required
+                />
+                
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">State</label>
+                <select
+                  onchange="print_city('state', this.selectedIndex);"
+                  id="sts"
+                  name="state"
+                  class="form-control"
+                  style="border: 1px solid rgb(255, 255, 255)"
+                  required
+                ></select>
+              </div>
 
-         <label for="">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter Your Email" Required>
-         <br>
+              <div class="col-md-3">
+                <label for="inputState" class="form-label">City</label>
+                <select id="state"  name ="city" class="form-control" required></select>
+              </div>
 
-         <label for="">Prices</label>
-        <input type="text" id="prices" name="prices" placeholder="$" Required>
-         <br>
+              <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Zip</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom05"
+                  name="zip"
+                  required
+                />
+              </div>
+             
+                <div class="col-md-6">
+                    <label for="Contact" class="form-label">Phone Number</label>
+                    
+                    <input
+                type="text"
+                id="phone"
+                placeholder="Phone Number"
+                class="form-control"
+                style="border: 1px solid rgb(255, 255, 255); padding-right: 10em;"
+                name="phone number"
+              />
+              </div>
 
-         <label for="">Services</label>
-        <input type="text" id="services" name="services" placeholder="select Your Service" Required>
-         <br>
-        <input type="submit">
+             <div class="col-md-6">
+                <label for="DateandTime" class="form=label">Date and Time</label>
+                <input
+                type="datetime-local"
+                class="form-control mx-auto mt-2"
+                placeholder="Select Date and Time"
+                style="border: 1px solid rgb(255, 255, 255)"
+                name ="dateandtime"
+              />
+             </div>
+             <div class="col-sm-6">
+              <select class="select2" multiple="multiple">
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <!-- more options -->
+              </select>
+              
+                
+             </div>
 
+              <div class="col-12">
+                <button class="button" type="submit">Book</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    </form>
-</body>
+    <script>
+      $(document).ready(function() {
+  $('.select2').select2();
+});
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      config = {
+        enableTime: true,
+        dateFormat: "d-m-y H:i",
+        minDate:"today",
+        minTime:"10:00",
+        maxTime:"18:00",
+        disable: [
+          function (date) {
+            // return true to disable
+            return date.getDay() === 0 || date.getDay() === 6;
+          },
+        ],
+        locale: {
+          firstDayOfWeek: 1, // start week on Monday
+        },
+      };
+      
+      flatpickr("input[type=datetime-local]", config);
+    </script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script language="javascript">
+        print_state("sts");
+      </script>
+      <script src="{% static 'build/js/intlTelInput.js' %}"></script>
+      <script>
+        var input = document.querySelector("#phone");
+        window.intlTelInput(input, {});
+      </script>
+  </body>
 </html>

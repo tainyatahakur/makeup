@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate,  login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from website.models import BookingModel
+
 from website.forms import BookingForm
 from website.models import ServicesModel
 from website.forms import ServicesForm, AppointmentForm
@@ -146,4 +147,8 @@ def appointment(request):
     # return HttpResponse('Appointment booked successfully!')
     return render(request, 'website/appointment.html')
 
+
+# def portfolio(request):
+#     items = Portfolio.objects.all()
+#     return render(request, 'website/portfolio.html', {'items': items})
 

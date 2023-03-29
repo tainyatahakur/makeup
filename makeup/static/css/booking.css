@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+*{
+    font-family: 'Tilt Neon', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow: hidden;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.527),
+      rgba(0, 0, 0, 0.5)
+    ),url("../images/3.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+
+

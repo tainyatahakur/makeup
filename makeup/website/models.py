@@ -13,13 +13,14 @@ class BookingModel(models.Model):
     username = models.CharField(max_length=50)
     fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50)
-    # phone = models.IntegerField()
+    phone = models.IntegerField()
+    phone = models.IntegerField(blank=True, null=True) 
     email = models.EmailField()
-    prices = models.IntegerField()
-    services = models.CharField(max_length=50)
-    # contact = models.ForeignKey("ContactModel", on_delete=models.CASCADE)
+    prices = models.IntegerField()                                            
+    services = models.CharField(max_length=50)                             
+    # contact = models.ForeignKey("ContactModel", on_delete=models.CASCADE)        
     
-    def _str_(self):
+    def __str__(self):
         return self.username
     
 
@@ -35,6 +36,6 @@ class AppointmentModel(models.Model):
     time = models.DateField(auto_now_add=True)
     date = models.DateField()
 
-    def _str_(self):
+    def __str__(self):
         return self.name
  
