@@ -154,7 +154,7 @@
         <h1>Experience Now</h1>
       </div>
       <div
-        class="container mt-5"
+        class="container"
         style="
           border: 1px solid rgb(255, 255, 255);
           padding: 1em 1em 1em;
@@ -166,7 +166,7 @@
             <img src="{% static 'images/2.jpg' %}"  class="img-fluid" />
           </div>
           <div class="col-sm-6">
-            <form class="row g-3 needs-validation" action="" method="post" novalidate>
+            <form class="row g-3 needs-validation" action="" method="POST">
                 {% csrf_token %}
               <div class="col-md-6">
                 <label for="validationCustom01" class="form-label"
@@ -176,7 +176,6 @@
                   type="text"
                   class="form-control"
                   id="validationCustom01"
-                  
                   name ="fname"
                   required
                 />
@@ -190,7 +189,6 @@
                   type="text"
                   class="form-control"
                   id="validationCustom02"
-                 
                   name = "lname"
                   required
                 />
@@ -220,10 +218,9 @@
                   required
                 ></select>
               </div>
-
               <div class="col-md-3">
                 <label for="inputState" class="form-label">City</label>
-                <select id="state"  name ="city" class="form-control" required></select>
+                <select id="state" name ="city" class="form-control" required></select>
               </div>
 
               <div class="col-md-3">
@@ -246,29 +243,38 @@
                 placeholder="Phone Number"
                 class="form-control"
                 style="border: 1px solid rgb(255, 255, 255); padding-right: 10em;"
-                name="phone number"
+                name="phone"
               />
               </div>
 
              <div class="col-md-6">
-                <label for="DateandTime" class="form=label">Date and Time</label>
+                <label for="DateandTime" class="form-label">Date and Time</label>
                 <input
                 type="datetime-local"
-                class="form-control mx-auto mt-2"
-                placeholder="Select Date and Time"
+                class="form-control mx-auto"
+                placeholder="Select Date"
                 style="border: 1px solid rgb(255, 255, 255)"
-                name ="dateandtime"
+                name ="datentime"
               />
              </div>
+             <div class="col-md-6">
+              <label for = "email" class="form-label">Email</label>
+              <input 
+              type="mail"
+              class="form-control"
+              placeholder="email"
+              name="email"
+              >
+             </div>
              <div class="col-sm-6">
-              <select class="select2" multiple="multiple">
+              <select class="select2" multiple="multiple" name="services">
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
                 <option value="AR">Arkansas</option>
                 <option value="CA">California</option>
-                <!-- more options -->
-              </select>
+                !more options
+              </select>  
               
                 
              </div>
@@ -295,11 +301,11 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
       config = {
-        enableTime: true,
-        dateFormat: "d-m-y H:i",
+        enableTime: false,
+        dateFormat: "Y-m-d",
         minDate:"today",
-        minTime:"10:00",
-        maxTime:"18:00",
+        // minTime:"10:00",
+        // maxTime:"18:00", Done Bro
         disable: [
           function (date) {
             // return true to disable
