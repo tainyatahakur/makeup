@@ -12,7 +12,8 @@ path('booking/', views.booking, name ='booking'),
 path('services/', views.services, name = 'services'),
 path('appointment/', views.appointment, name = 'appointment'),
 # path('portfolio/', views.portfolio, name = 'portfolio'),
-
+path('forgot-password/', views.forgot_password, name='forgot_password'),
+path('Search/', views.search, name ='Search'),
 
 
 ]       

@@ -14,7 +14,7 @@ class BookingModel(models.Model):
     fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50)
     address = models.CharField(max_length=150)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=15)
     email = models.EmailField()
     #prices = models.IntegerField()                                            
     services = models.CharField(max_length=50) 
@@ -30,7 +30,7 @@ class BookingModel(models.Model):
 
 class ServicesModel(models.Model):
     name = models.CharField(max_length=50)
-    
+    prices = models.IntegerField()
     def __str__(self):
         return self.name
 
@@ -42,4 +42,9 @@ class AppointmentModel(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+
+    
+
  

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-b)(c1z$$7&v-fji2#ve%66b_-t=+tl8d47zkp0@rd$2$w@9i4_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.29.90']
 
 
 # Application definition
@@ -131,3 +131,4 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+EMAIL_HOST_USER = "thakurtainya@gmail.com"

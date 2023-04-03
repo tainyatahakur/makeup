@@ -24,3 +24,6 @@ class AppointmentForm(ModelForm):
     class Meta:
         model = AppointmentModel
         fields = "__all__"
+
+
+

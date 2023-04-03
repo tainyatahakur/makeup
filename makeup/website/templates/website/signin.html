@@ -1,13 +1,78 @@
-<form method="post">
-    {% csrf_token %}
-        <label for="">Username</label>
-        <input type="text" id="username" name="name" placeholder="Enter Your username" Required>
-        <br>
+<!DOCTYPE html>
+<html lang="en">
 
-        <label for="">Password</label>
-        <input type="password" id="pass1" name="pass1" placeholder="Create Your Password" Required>
-        <br>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load static %}
+    <!--css-->
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+</head>
 
-    {{ form.as_p }}
-    <button type="submit">Sign in</button>
-  </form>
+<body>
+    {% block preloader %}
+{% endblock preloader %}
+    {% if messages %}
+    <ul class="messages" style="display: none">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %} id="messs">{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <section>
+        <div class="form-container">
+            <h1>Login</h1>
+            <form action="#" method='POST'>
+                {% csrf_token %}
+                <div class="control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email">
+                </div>
+                <div class="control">
+                    <label for="psw">Password</label>
+                    <input type="password" name="password" id="psw">
+                </div>
+                <span><input type="checkbox" value="lsRememberMe" id="rememberMe"> Remember Me </span>
+                <div class="control">
+                    <input type="submit" value="Login" onclick="lsRememberMe()">
+                </div>
+                <div class="link">
+                    <a href="{% url 'forgot_password' %}">Forgot Password ?</a>
+                    <br><br>
+                    New To Site?<a href="{% url 'signup' %}" style="text-decoration: underline;"> Sign Up Here</a>
+                </div>
+        </div>
+        </form>
+    </section>
+
+    <script>
+        const rmCheck = document.getElementById("rememberMe"),
+            emailInput = document.getElementById("email");
+
+        if (localStorage.checkbox && localStorage.checkbox !== "") {
+            rmCheck.setAttribute("checked", "checked");
+            emailInput.value = localStorage.username;
+        } else {
+            rmCheck.removeAttribute("checked");
+            emailInput.value = "";
+        }
+
+        function lsRememberMe() {
+            if (rmCheck.checked && emailInput.value !== "") {
+                localStorage.username = emailInput.value;
+                localStorage.checkbox = rmCheck.value;
+            } else {
+                localStorage.username = "";
+                localStorage.checkbox = "";
+            }
+        }
+    </script>
+    <script>
+        var message = document.getElementById("messs").innerHTML
+        alert(message)
+    </script>
+</body>
+
+</html>

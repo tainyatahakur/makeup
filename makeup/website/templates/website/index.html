@@ -9,6 +9,10 @@
     <link rel="icon" type="image/x-icon" href="{% static 'images/pgf.png' %}" />
     <!--css-->
     <link href="{% static 'css/index.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/services.css' %}" rel="stylesheet" />
+
+    <!-- {% block extracss %}
+    {% endblock extracss %} -->             
     <!--bootstrap-->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -31,7 +35,10 @@
       crossorigin="anonymous"
     ></script>
   </head>
+  {% block body %}
   <body class="bg-black">
+    {% endblock body %}
+
     <div class="container-fluid bg-black fixed-top">
       <div class="container-fluid" style="display: flex">
         <div class="container text-center mx-auto">
@@ -39,13 +46,80 @@
             <img
               src="{% static 'images/pgf.png' %}"
               alt="logo"
-              style="width: 5em; height: auto"
+              style="width: 6em; height: 4em"
               id="logo"
               class="mt-2"
             />
           </a>
         </div>
         <div class="icons mt-3" style="display: flex">
+         
+            <!-- <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a> -->
+            
+          <!-- <a href="#">
+            <i
+              class="fa-solid fa-user mx-1 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="account"
+            >
+            </i
+          ></a> -->
+          <div class="dropdown mx-2 text-center">
+            {% if user.is_authenticated %}
+            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" style="background-color: transparent; color: black; border: none;">
+                <span style="font-weight: 600; font-size: 1.3em;">{{user}}</span>
+
+            </button> -->
+            <a href="#" style="color: white; text-decoration: none; text-transform: uppercase;">
+              <i
+                class="mx-1 mt-2"
+                style="color: white; font-size: 1.2em"
+                title="account"
+              >
+              </i
+            >{{user}} 
+          </a> 
+            {% else %}
+            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" style="background-color: transparent; color: black; border: none;">
+                <span style="font-weight: 600; font-size: 1.3em;">User Profile</span>
+
+            </button> -->
+            <a href="#">
+              <i
+                class="fa-solid fa-user mx-1 mt-2"
+                style="color: white; font-size: 1.2em"
+                title="account"
+              >                        
+              </i
+            >
+          </a> 
+
+
+            {% endif %}
+
+
+            <ul class="dropdown-menu mx-auto dropdown-menu-dark" style="left: auto; right: 0;">
+                <!-- <li><a class="dropdown-item" href="#">Your Account</a></li>
+                <li> -->
+                    <!-- <hr class="dropdown-divider"> -->
+                
+                {% if user.is_superuser %}   
+                <li><a class="dropdown-item" href="#">AdminPanel</a></li>
+                {% endif %}
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'signout' %}">Sign-Out</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'signin' %}">Sign-In</a></li>
+                {% endif %}   
+
+            </ul>                           
+        </div>
+          
           <div class="search">
             <div class="icon">
               <i
@@ -57,7 +131,10 @@
             </div>
 
             <div class="input">
-              <input type="text" placeholder="Search" id="mysearch" />
+              <form class="row g-3 needs-validation mt-4" novalidate action="" method="POST">
+                {% csrf_token %}
+              <input type="text" placeholder="Search" id="mysearch" name = 'Search' />
+              </form>
               <span
                 class="clear"
                 onclick="document.getElementById('mysearch').value ='' "
@@ -65,27 +142,10 @@
               </span>
             </div>
           </div>
-
-          <a href="#">
-            <i
-              class="fa-solid fa-user mx-1 mt-2"
-              style="color: white; font-size: 1.2em"
-              title="account"
-            >
-            </i
-          ></a>
-          <a href="#">
-            <i
-              class="fa-solid fa-cart-shopping mx-2 mt-2"
-              style="color: white; font-size: 1.2em"
-              title="cart"
-            >
-            </i
-          ></a>
         </div>
       </div>
     </div>
-
+    {% block nav %}
     <nav class="navbar navbar-expand-lg mt-5 bg-black mx-auto">
       <div class="container-fluid mt-3">
         <button
@@ -105,7 +165,7 @@
               <a
                 class="nav-link mx-4"
                 aria-current="page"
-                href="#"
+                href="{% url 'index' %}"
                 style="color: white"
                 >Home</a
               >
@@ -115,32 +175,18 @@
                 About Us
               </a>
             </li>
-            <li class="nav-item dropdown bg-black">
-              <a
-                class="nav-link dropdown-toggle mx-4 bg-black"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style="color: white"
-              >
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="{% url 'services' %}" style="color: white">
                 Services
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Manual Makeup</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#"></a>HD Makeup</li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#"></a>Signature Bridal Makeup</li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#"></a>Glass Skin Makeup</li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#"></a>Waterproof Bridal Makeup</li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                </li>
-              </ul>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link mx-4" href="{% url 'booking' %}" style="color: white">
+                Booking
+              </a>
+            </li>
+            
             <li class="nav-item">
               <a class="nav-link mx-4" href="#" style="color: white"> Blogs </a>
             </li>
@@ -158,7 +204,9 @@
         </div>
       </div>
     </nav>
+   {% endblock nav %}
 
+   {% block content %}
     <div class="main-content">
       <div class="box" style="background-color: black">
         <video width="100%" height="100%" autoplay muted loop>
@@ -247,6 +295,7 @@
         </div>
       </div>
     </div>
+    {% endblock content %}
 
     <div class="container-fluid bg-black">
       <div class="container mt-4">
@@ -259,7 +308,7 @@
                   <p>About Us</p>
                 </li>
               </a>
-              <a href="#" style="text-decoration: none; color: white">
+              <a href="{% url 'services' %}" style="text-decoration: none; color: white">
                 <li>
                   <p>Services</p>
                 </li>
@@ -316,7 +365,7 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
-    <script>
+    <!-- <script>
       const logo = document.getElementById("logo");
       window.addEventListener("scroll", function () {
         // get the current scroll position
@@ -340,6 +389,6 @@
           // ease: "power2.out",
         });
       });
-    </script>
+    </script> -->
   </body>
 </html>

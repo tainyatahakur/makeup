@@ -6,9 +6,3 @@
     font-family: 'Alkatra', cursive;
     scroll-behavior: smooth;
 }
-body{
-    background-image: linear-gradient(
-      rgba(0, 0, 0, 0.527),
-      rgba(0, 0, 0, 0.5)
-    ),url("../images/2.jpg")
-  }
