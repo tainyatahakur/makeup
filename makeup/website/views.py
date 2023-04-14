@@ -14,6 +14,8 @@ from django.http import HttpResponse
 import random  
 from django.core.mail import send_mail
 from django.core import serializers
+from website.forms import CreateUserForm
+from django.http import JsonResponse
 
 
 def index(request):
@@ -33,6 +35,22 @@ def index(request):
     context = {'results': results, 'query': search}
     return render(request, 'website/index.html')
 
+def homepage(request):
+    results = ""
+    search = ""
+    if request.method == "POST":
+        search = request.POST.get('search')
+        print("Search: ", search)
+        # query = request.POST.get('search')
+        if search:
+            searchres = ServicesModel.objects.filter(name__icontains=search)
+            datas = serializers.serialize("json", searchres)
+            print("res: ", results)
+            return render(request, 'website/search.html', {'datas': datas})
+        else:
+            data = None
+    context = {'results': results, 'query': search}
+    return render(request, 'website/homepage.html')
 
 def contact(request):
     form = ContactForm()
@@ -49,29 +67,34 @@ def contact(request):
     return render(request, 'website/contact.html', context)
 
 
-def signup(request):
-    if request.method == 'POST':
-        # username = request.POST.get('username')
-        username = request.POST.get('username')
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
-        email = request.POST.get('email')
-        pass1 = request.POST.get('pass1')
-        pass2 = request.POST.get('pass2')
+def Signup(request):
+    form = CreateUserForm()
 
-        myuser = User.objects.create_user(username, email, pass1)
-        myuser.first_name = fname
-        myuser.last_name = lname
+    username = request.POST.get('username')
+    email = request.POST.get('email')
+    password1 = request.POST.get('password1')
+    password2 = request.POST.get('password2')
+    print(username)
+    print(email)
 
-        myuser.save()
-        username = User.objects.get(email=email).username
+    if request.method=='POST':
+        form = CreateUserForm(request.POST)
 
-        messages.success(
-            request, "Your Account has been successfully created.")
-        return redirect('/')
-        # return redirect('signin')
-        return render(request, 'website/signup.html')
-    return render(request, 'website/signup.html')
+        if form.is_valid():
+            form.save()
+            print("Form Saved")
+            user = form.cleaned_data.get("username")
+            messages.success(request, "Account created for "+ user+ " succesfully")
+            # response = JsonResponse({"success":True})
+            return redirect("homepage")
+
+        else:
+            print("Invalid Form", form.errors)
+            response = JsonResponse({"error":form.errors})
+            response.status_code = 403
+            return response
+            
+    return render(request, 'website/signup.html', {'form':form})
 
 
 def signin(request):
@@ -86,7 +109,7 @@ def signin(request):
         user = authenticate(request, username=username, password=pass1)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return redirect('homepage')
             
         else:
             print("User None")

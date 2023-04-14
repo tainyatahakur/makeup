@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PGF</title>
+    {% load static  %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/pgf.png' %}" />
+    <!--css-->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" />
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <!--aos-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!--gsap-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+   
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+    <!--boxicons-->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <!--fontaweso-->
+    <script
+      src="https://kit.fontawesome.com/8feaa5fbd6.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+      integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="/css/owl.themed.css" rel="stylesheet" />
+    <link href="/css/owlcarosel.css" rel="stylesheet" />
+  </head>
+{% block body %}
+
+<body class="bg-black">
+  {% endblock body %}
+
+  <div class="container-fluid bg-black fixed-top">
+    <div class="container-fluid" style="display: flex">
+      <div class="container text-center mx-auto">
+        <a class="navbar-brand mx-auto" href="#">
+          <img src="{% static 'images/pgf.png' %}" alt="logo" style="width: 6em; height: 4em; padding: 0%" id="logo" class="mt-2" />
+        </a>
+      </div>
+      <div class="icons mt-3" style="display: flex">
+
+        <!-- <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a> -->
+
+        <!-- <a href="#">
+            <i
+              class="fa-solid fa-user mx-1 mt-2"
+              style="color: white; font-size: 1.2em"
+              title="account"
+            >
+            </i
+          ></a> -->
+        <div class="dropdown mx-2 text-center">
+          {% if user.is_authenticated %}
+          <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" style="background-color: transparent; color: black; border: none;">
+                <span style="font-weight: 600; font-size: 1.3em;">{{user}}</span>
+
+            </button> -->
+          <a href="#" style="color: white; text-decoration: none; text-transform: uppercase;">
+            <i class="mx-1 mt-2" style="color: white; font-size: 1.2em" title="account">
+            </i>{{user}}
+          </a>
+          {% else %}
+          <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" style="background-color: transparent; color: black; border: none;">
+                <span style="font-weight: 600; font-size: 1.3em;">User Profile</span>
+
+            </button> -->
+          <a href="#">
+            <i class="fa-solid fa-user mx-1 mt-2" style="color: white; font-size: 1.2em" title="account">
+            </i>
+          </a>
+
+
+          {% endif %}
+
+
+          <ul class="dropdown-menu mx-auto dropdown-menu-dark" style="left: auto; right: 0;">
+            <!-- <li><a class="dropdown-item" href="#">Your Account</a></li>
+                <li> -->
+            <!-- <hr class="dropdown-divider"> -->
+
+            {% if user.is_superuser %}
+            <li><a class="dropdown-item" href="#">AdminPanel</a></li>
+            {% endif %}
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            {% if user.is_authenticated %}
+            <li><a class="dropdown-item" href="{% url 'signout' %}">Sign-Out</a></li>
+            {% else %}
+            <li><a class="dropdown-item" href="{% url 'signin' %}">Sign-In</a></li>
+            {% endif %}
+
+          </ul>
+        </div>
+
+        <div class="search">
+          <div class="icon">
+            <i class="fa-solid fa-magnifying-glass" style="color: white; font-size: 1.2em" title="search">
+            </i>
+          </div>
+
+          <div class="input">
+            <form class="row g-3 needs-validation mt-4" novalidate action="" method="POST">
+              {% csrf_token %}
+              <input type="text" placeholder="Search" id="mysearch" name='Search' />
+            </form>
+            <span class="clear" onclick="document.getElementById('mysearch').value ='' ">
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block nav %}
+  <nav class="navbar navbar-expand-lg mt-5 bg-black mx-auto">
+    <div class="container-fluid mt-3">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+          <li class="nav-item">
+            <a class="nav-link mx-4" aria-current="page" href="{% url 'homepage' %}" style="color: white">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-4" href="#" style="color: white">
+              About Us
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-4" href="{% url 'services' %}" style="color: white">
+              Services
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link mx-4" href="{% url 'booking' %}" style="color: white">
+              Booking
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link mx-4" href="#" style="color: white"> Blogs </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-4" href="#" style="color: white">
+              Portfolio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-4" href="{% url 'contact' %}" style="color: white">Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% endblock nav %}
+
+  {% block content %}
+  <div class="main-content text-center mx-auto">
+    <div class="box" style="background-color: black; background-attachment: fixed">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 mt-5" data-aos="fade-right" data-aos-duration="3000">
+            <p class="mt-2" style="color: white; text-align: left; font-size: 1.3em">
+              At Pryanka Glamour World, we offer a range of professional
+              makeup services to enhance your natural beauty and make you feel
+              confident and glamorous for any occasion.
+              <br />
+              <br />
+              Our skilled makeup artists use high-quality products and
+              techniques to create stunning looks for bridal, special
+              occasion, and photo shoot makeup. Let us help you look and feel
+              your best.
+              <br />
+              <br />
+              Whether you're looking for a natural, subtle look or a bold,
+              dramatic style, our makeup artists will work with you to create
+              the perfect look to match your personality and preferences.
+              <br />
+              <br />
+              Our bridal makeup services are designed to make you feel
+              confident and radiant on your special day, and we offer a
+              variety of packages to suit your needs and budget.
+            </p>
+            <div class="container mt-5" style="
+                position: relative;
+                width: 300px;
+                height: 300px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+              ">
+              <img src="{% static 'images/1.jpg' %}" class="img1" style="padding: 0%" />
+              <img src="{% static 'images/2.jpg' %}" class="img2" style="padding: 0%" />
+              <img src="{% static 'images/2.jpg' %}" class="img3" style="padding: 0%" />
+              <img src="{% static 'images/2.jpg' %}" class="img4" style="padding: 0%" />
+              <img src="{% static 'images/2.jpg' %}" class="img5" style="padding: 0%" />
+            </div>
+
+            <a href="#">
+              <button class="btn-1 mb-2" type="button" style="margin-top: 8em">
+                Services
+              </button>
+            </a>
+          </div>
+          <div class="col-sm-6" data-aos="fade-left" data-aos-duration="3000">
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="{% static 'images/m1.jpg' %}" style="padding: 0" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="{% static 'images/babbu Bains.jpg' %}" style="padding: 0" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="{% static 'images/m2.JPG' %}" style="padding: 0" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border: 1px solid pink" />
+    <div class="box mt-5 text-center mx-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 mt-4" style="text-align: left; color: white" data-aos="fade-up" data-aos-duration="3000">
+            <h1 style="letter-spacing: 4px; font-weight: 200">
+              MAKEUP ARTIST
+            </h1>
+            <h1 style="color: pink">Pryanka Verma</h1>
+            <p style="font-size: 1.2em; font-weight: 200; color: pink">
+              Pryanka has a passion for makeup and hairstyling that has kept
+              her dedicated to perfecting her craft for over a decade. Her
+              love for the industry shines through in her work, and her
+              clients trust her expertise and creativity.
+              <br />
+              <br />
+              Pryanka's dedication to makeup and hairstyling has driven her to
+              constantly seek out new techniques and trends, allowing her to
+              provide her clients with the latest styles and looks. Her years
+              of experience have made her a skilled and versatile artist, able
+              to create both natural and dramatic makeup and hairstyles for
+              any occasion. She takes pride in her work and enjoys helping her
+              clients feel confident and beautiful.
+            </p>
+
+            <div class="container mt-2 text-center mx-auto">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="{% static 'images/1.jpg' %}" class="img-fluid" style="padding: 0%" />
+                </div>
+                <div class="col-sm-4">
+                  <img src="{% static 'images/1.jpg' %}" class="img-fluid" style="padding: 0%" />
+                </div>
+                <div class="col-sm-4">
+                  <img src="{% static 'images/1.jpg' %}" class="img-fluid" style="padding: 0%" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6"data-aos="fade-up" data-aos-duration="3000">
+            <img src="{% static 'images/2.jpg' %}" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <hr style="border: 1px solid pink" />
+
+    <div class="box mt-5 text-center mx-auto">
+      <div class="container">
+        <h1 style="color: white; letter-spacing: 3px" class="work">
+          Our Work
+        </h1>
+        <div class="row">
+          <div class="col-sm-4" data-aos="fade-left" data-aos-duration="3000">
+            <img src="{% static 'images/m1.jpg' %}" class="img-fluid" />
+          </div>
+          <div class="col-sm-4" data-aos="fade-right" data-aos-duration="3000">
+            <img src="{% static 'images/m2.JPG' %}" class="img-fluid" />
+          </div>
+          <div class="col-sm-4" data-aos="fade-up" data-aos-duration="3000">
+            <img src="{% static 'images/babbu Bains.jpg' %}" class="img-fluid" />
+          </div>
+          <div class="col-sm-4" data-aos="fade-right" data-aos-duration="3000">
+            <img src="{% static 'images/babbu Bains.jpg' %}" class="img-fluid" />
+          </div>
+          <div class="col-sm-4" data-aos="fade-left" data-aos-duration="3000">
+            <img src="{% static 'images/m1.jpg' %}" class="img-fluid" />
+          </div>
+          <div class="col-sm-4" data-aos="fade-up" data-aos-duration="3000">
+            <img src="{% static 'images/m2.JPG' %}" class="img-fluid" />
+          </div>
+        </div>
+        <div class="container text-center mt-3">
+          <button class="btn-1" type="submit" style="letter-spacing: 3px">
+            FIND MORE
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="box mt-4 text-center mx-auto">
+      <div class="container" data-aos="fade-right" data-aos-duration="3000">
+        <h1 class="work" style="text-transform: uppercase; color: white; letter-spacing: 3px">
+          Kind Words
+        </h1>
+        <br />
+      </div>
+      <div class="container">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="container">
+                <div class="row" style="background-color: black">
+                  <div class="col-sm-5" style="
+                      background-color: black;
+                      color: white;
+                      text-align: left;
+                      border: 2px solid wheat;
+                      padding: 1em 1em 1em;
+                      border-radius: 10px;
+                    ">
+                    <span style="display: flex; flex-direction: row">
+                      <h4>Tainya</h4>
+                      <img src="{% static 'images/4 star rating.png' %}" style="width: 6em; height: 2em; padding: 0%"
+                        class="img-fluid mx-1" />
+                    </span>
+                    <h5>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing
+                      elit. Nostrum distinctio, ratione cupiditate dolorum eum
+                      dignissimos debitis fugit architecto dicta eligendi
+                      impedit quidem, voluptate temporibus quia reprehenderit!
+                      Eos ipsam porro numquam.
+                    </h5>
+                  </div>
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-5" style="
+                      background-color: black;
+                      color: white;
+                      text-align: left;
+                      border: 2px solid wheat;
+                      padding: 1em 1em 1em;
+                      border-radius: 10px;
+                    ">
+                    <span style="display: flex; flex-direction: row">
+                      <h4>Navneet</h4>
+                      <img src="{%  static 'images/4 star rating.png' %}" style="width: 6em; height: 2em; padding: 0%"
+                        class="img-fluid mx-1" />
+                    </span>
+                    <h5>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Excepturi ducimus eveniet cum laborum natus cumque,
+                      consequatur sint mollitia quas culpa odit, consequuntur
+                      totam quasi aspernatur? Distinctio doloribus tempora eos
+                      ab!
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="container">
+                <div class="row" style="background-color: black">
+                  <div class="col-sm-5" style="
+                      background-color: black;
+                      color: white;
+                      text-align: left;
+                      border: 2px solid wheat;
+                      padding: 1em 1em 1em;
+                      border-radius: 10px;
+                    ">
+                    <span style="display: flex; flex-direction: row">
+                      <h4>Tainya</h4>
+                      <img src="{% static 'images/4 star rating.png' %}" style="width: 6em; height: 2em; padding: 0%"
+                        class="img-fluid mx-1" />
+                    </span>
+                    <h5>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing
+                      elit. Nostrum distinctio, ratione cupiditate dolorum eum
+                      dignissimos debitis fugit architecto dicta eligendi
+                      impedit quidem, voluptate temporibus quia reprehenderit!
+                      Eos ipsam porro numquam.
+                    </h5>
+                  </div>
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-5" style="
+                      background-color: black;
+                      color: white;
+                      text-align: left;
+                      border: 2px solid wheat;
+                      padding: 1em 1em 1em;
+                      border-radius: 10px;
+                    ">
+                    <span style="display: flex; flex-direction: row">
+                      <h4>Navneet</h4>
+                      <img src="{% static 'images/4 star rating.png' %}" style="width: 6em; height: 2em; padding: 0%"
+                        class="img-fluid mx-1" />
+                    </span>
+                    <h5>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Excepturi ducimus eveniet cum laborum natus cumque,
+                      consequatur sint mollitia quas culpa odit, consequuntur
+                      totam quasi aspernatur? Distinctio doloribus tempora eos
+                      ab!
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="container">
+                <div class="row" style="background-color: black">
+                  <div class="col-sm-5" style="
+                      background-color: black;
+                      color: white;
+                      text-align: left;
+                      border: 2px solid wheat;
+                      padding: 1em 1em 1em;
+                      border-radius: 10px;
+                    ">
+                    <span style="display: flex; flex-direction: row">
+                      <h4>Tainya</h4>
+                      <img src="{% static 'images/4 star rating.png' %}" style="width: 6em; height: 2em; padding: 0%"
+                        class="img-fluid mx-1" />
+                    </span>
+                    <h5>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing
+                      elit. Nostrum distinctio, ratione cupiditate dolorum eum
+                      dignissimos debitis fugit architecto dicta eligendi
+                      impedit quidem, voluptate temporibus quia reprehenderit!
+                      Eos ipsam porro numquam.
+                    </h5>
+                  </div>
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-5" style="
+                      background-color: black;
+                      color: white;
+                      text-align: left;
+                      border: 2px solid wheat;
+                      padding: 1em 1em 1em;
+                      border-radius: 10px;
+                    ">
+                    <span style="display: flex; flex-direction: row">
+                      <h4>Navneet</h4>
+                      <img src="{% static 'images/4 star rating.png' %}" style="width: 6em; height: 2em; padding: 0%"
+                        class="img-fluid mx-1" />
+                    </span>
+                    <h5>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Excepturi ducimus eveniet cum laborum natus cumque,
+                      consequatur sint mollitia quas culpa odit, consequuntur
+                      totam quasi aspernatur? Distinctio doloribus tempora eos
+                      ab!
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+
+  <br />
+  
+<div class="flex-wrapper bg-black">
+  <div class="container-fluid bg-black" style="padding-top: 1em;">
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-sm-4" style="color: white">
+          <h1 style="margin-left: 0.7em">Explore</h1>
+          <ul style="list-style: none">
+            <a href="#" style="text-decoration: none; color: white">
+              <li>
+                <p>About Us</p>
+              </li>
+            </a>
+            <a href="#" style="text-decoration: none; color: white">
+              <li>
+                <p>Services</p>
+              </li>
+            </a>
+            <a href="#" style="text-decoration: none; color: white">
+              <li>
+                <p>Blogs</p>
+              </li>
+            </a>
+            <a href="#" style="text-decoration: none; color: white">
+              <li>
+                <p>Portfolio</p>
+              </li>
+            </a>
+            <a href="#" style="text-decoration: none; color: white">
+              <li>
+                <p>Contact Us</p>
+              </li>
+            </a>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h1 style="color: white; margin-left: 0.7em">Connect With Us</h1>
+          <div class="container-fluid text-center" style="display: flex; flex-direction: column">
+            <a href="#" style="text-decoration: none; color: white">
+              <i class="fa-brands fa-instagram mx-2" style="font-size: 2em"></i>
+            </a>
+
+            <a href="#" style="text-decoration: none; color: white">
+              <i class="fa-brands fa-twitter mx-2 mt-4" style="font-size: 2em"></i>
+            </a>
+            <a href="#" style="text-decoration: none; color: white">
+              <i class="fa-brands fa-facebook mt-4" style="font-size: 2em"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/owl.carosel.js' %}"></script>
+
+  <!-- <script>
+    const logo = document.getElementById("logo");
+    window.addEventListener("scroll", function () {
+      // get the current scroll position
+      const scrollPosition = window.scrollY;
+
+      // calculate the new size of the container
+      const newWidth = 90 + scrollPosition * 0.1;
+      const newHeight = 60 + scrollPosition * 0.1;
+
+      // limit the amount of scaling that occurs
+      if (newWidth > 150) {
+        newWidth = 200;
+        newHeight = 200;
+      }
+
+      // use GSAP to animate the logo's size and position
+      gsap.to(logo, {
+        duration: 0.5,
+        width: newWidth,
+        height: newHeight,
+        // ease: "power2.out",
+      });
+    });
+  </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+    });
+  </script>
+</body>
+
+</html>                                                                                            

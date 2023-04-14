@@ -111,3 +111,128 @@ a{
    position: relative;
    text-align: center;
   }
+  .btn-1{
+    padding: 8px 40px 8px;
+    color: white;
+    border: 2px solid wheat;
+    background-color: black;
+  }
+  .btn-1:hover{
+    padding: 8px 40px 8px;
+    color: black;
+    border: 2px solid wheat;
+    background-color: white;
+  }
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .img1 {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    right: 100px;
+    right: 100px;
+    transition: transform 2s ease;
+  }
+  
+  .img2 {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    top: 50px;
+    transition: transform 2s ease;
+    left: 0px;
+  }
+  
+  .img3 {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    top: 100px;
+    left: 00px;
+    transition: transform 2s ease;
+  }
+  .img4 {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    top: 150px;
+    left: 00px;
+    transition: transform 2s ease;
+  }
+  
+  .img5 {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    top: 200px;
+    left: 00px;
+    transition: transform 2s ease;
+  }
+  
+  .work{
+    font-family: 'Satisfy', cursive;
+  }
+
+.img1:hover,
+.img2:hover,
+.img3:hover,
+.img4:hover,
+.img5:hover {
+  transform: translateY(-90px);
+}
+
+img {
+  --c: #f8aada; /* the border color */
+  --b: 2px;    /* the border thickness*/
+  --g: 10px;     /* the gap on hover */
+  
+  padding: calc(var(--g) + var(--b));
+  --_g: #0000 25%,var(--c) 0;
+  background: 
+    conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+     var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+    conic-gradient(            at bottom var(--b) left  var(--b),var(--_g))
+     0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+  transition: .3s, background-position .3s .3s;
+  cursor: pointer;
+}
+img:hover {
+  --_i: 100%;
+  transition: .3s, background-size .3s .3s;
+}
+.flex-wrapper{
+  display: flex;
+  min-height: 50vh;
+  flex-direction: column;
+  justify-content: space-between;
+}

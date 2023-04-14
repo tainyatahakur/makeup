@@ -3,9 +3,10 @@ from website import views
 
 urlpatterns = [
 path('', views.index, name="index" ),
+path('homepage/' ,views.homepage, name = 'homepage') ,
 path('contact/', views.contact, name ='contact'),
 path('signin/', views.signin, name = 'signin'),
-path('signup/', views.signup, name = 'signup'),
+path('signup/', views.Signup, name = 'signup'),
 path('signout/', views.signout, name = 'signout'),
 path('booking/', views.booking, name ='booking'),
 # path('search/', views.search, name = 'search'),

@@ -1,4 +1,4 @@
-{% extends 'website/index.html' %}
+{% extends 'website/homepage.html' %}
 {% load static %}
 
 {% block preloader %}
@@ -18,7 +18,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for i in data %}
         <div class="col">
-            <a href="{% url 'DetailProduct' i.id %}">
+            <a href="{% url 'services' i.id %}">
                 <div class="card" style="border: none">
                     <img src="{{i.img.url}}" class="card-img-top" style="width: 300px; height: 150pxs" 
                         onmouseover="this.src='{{i.img.url}}'"
@@ -40,6 +40,7 @@
                                             style="color: palevioletred; font-size: 1.4em"></i></a>
                                 </div>
                             </div>
+
 
 
                             {% else %}
@@ -65,3 +66,5 @@
 <script src="{% static 'js/index.js' %}"></script>
 
 {% endblock %}
+
+
