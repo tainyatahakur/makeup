@@ -15,6 +15,8 @@ path('appointment/', views.appointment, name = 'appointment'),
 # path('portfolio/', views.portfolio, name = 'portfolio'),
 path('forgot-password/', views.forgot_password, name='forgot_password'),
 path('Search/', views.search, name ='Search'),
+path('GetBookingDatentime/', views.GetBookingDatentime, name = 'GetBookingDatentime'),
+path('Your_booking/', views.Your_booking, name = 'Your_booking'),
 
 
 ]       

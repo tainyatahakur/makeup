@@ -1,0 +1,56 @@
+{% extends 'website/homepage.html' %}
+
+{% block content %}
+{% block body %}
+{% endblock body %}
+{% load static %}
+ <body style="background-image: url({% static 'images/3.jpg' %});">
+    <div class="container text-center mx-auto mt-3">
+    <h1 style="color: rgb(0, 0, 0);">Your Bookings</h1>
+    </div>
+    <div class="container-fluid mx-auto">
+    <table class="table table-stripped-columns table-bordered text-center border-dark" style="color: rgb(0, 0, 0);">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Date</th>
+            <th scope="col">Services</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for booking in data %}
+            <th scope="row">{{ booking.id }}</th>
+            <td>{{booking.fname}}</td>
+            <td>{{booking.address}}</td>
+            <td>{{booking.phone}}</td>
+            <td>{{booking.datentime }}</td>
+            <td>{{booking.services }}</td>
+           
+
+          </tr>
+          <!-- <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+ </body>
+ {% endfor %}
+ {% endblock %}
