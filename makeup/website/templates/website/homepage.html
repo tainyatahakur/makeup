@@ -133,11 +133,11 @@
           </div>
 
           <div class="input">
-            <form class="row g-3 needs-validation mt-4" novalidate action="" method="POST">
-              {% csrf_token %}
-              <input type="text" placeholder="Search" id="mysearch" name='Search' />
+            <form class="row g-3 needs-validation mt-4" novalidate action="" method="GET">
+              <!-- {% csrf_token %} -->
+              <input type="text" id="mysearch" name='abc' />
             </form>
-            <span class="clear" onclick="document.getElementById('mysearch').value ='' ">
+            <!-- <span class="clear" onclick="document.getElementById('mysearch').value ='' "> -->
             </span>
           </div>
         </div>
@@ -167,14 +167,14 @@
             </a>
           </li>
 
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link mx-4" href="{% url 'booking' %}" style="color: white">
               Booking
             </a>
-          </li> -->
+          </li>
 
           <li class="nav-item">
-            <a class="nav-link mx-4" href="#" style="color: white"> Blogs </a>
+            <a class="nav-link mx-4" href="{% url 'allblogs' %}" style="color: white"> Blogs </a>
           </li>
           <li class="nav-item">
             <a class="nav-link mx-4" href="#" style="color: white">
@@ -198,7 +198,7 @@
         <div class="row">
           <div class="col-sm-6 mt-5" data-aos="fade-right" data-aos-duration="3000">
             <p class="mt-2" style="color: white; text-align: left; font-size: 1.3em">
-              At Pryanka Glamour World, we offer a range of professional
+              At Priyanka's Glamour Forever, we offer a range of professional
               makeup services to enhance your natural beauty and make you feel
               confident and glamorous for any occasion.
               <br />
@@ -234,7 +234,7 @@
               <img src="{% static 'images/2.jpg' %}" class="img5" style="padding: 0%" />
             </div>
 
-            <a href="#">
+            <a href="{% url 'services' %}">
               <button class="btn-1 mb-2" type="button" style="margin-top: 8em">
                 Services
               </button>
@@ -267,19 +267,19 @@
             <h1 style="letter-spacing: 4px; font-weight: 200">
               MAKEUP ARTIST
             </h1>
-            <h1 style="color: pink">Pryanka Verma</h1>
+            <h1 style="color: pink">Mrs. Priyanka Verma</h1>
             <p style="font-size: 1.2em; font-weight: 200; color: pink">
-              Pryanka has a passion for makeup and hairstyling that has kept
+              Priyanka has a passion for makeup that has kept
               her dedicated to perfecting her craft for over a decade. Her
               love for the industry shines through in her work, and her
               clients trust her expertise and creativity.
               <br />
               <br />
-              Pryanka's dedication to makeup and hairstyling has driven her to
+              Priyanka's dedication to makeup has driven her to
               constantly seek out new techniques and trends, allowing her to
               provide her clients with the latest styles and looks. Her years
               of experience have made her a skilled and versatile artist, able
-              to create both natural and dramatic makeup and hairstyles for
+              to create both natural and dramatic makeup for
               any occasion. She takes pride in her work and enjoys helping her
               clients feel confident and beautiful.
             </p>
@@ -302,7 +302,7 @@
             <img src="{% static 'images/2.jpg' %}" class="img-fluid" />
           </div>
         </div>
-      </div>
+      </div>                                                            
     </div>
     <br />
 
@@ -522,12 +522,12 @@
                 <p>About Us</p>
               </li>
             </a>
-            <a href="#" style="text-decoration: none; color: white">
+            <a href="{% url 'services' %}" style="text-decoration: none; color: white">
               <li>
                 <p>Services</p>
               </li>
             </a>
-            <a href="#" style="text-decoration: none; color: white">
+            <a href="{% url 'allblogs' %}" style="text-decoration: none; color: white">
               <li>
                 <p>Blogs</p>
               </li>
@@ -537,7 +537,7 @@
                 <p>Portfolio</p>
               </li>
             </a>
-            <a href="#" style="text-decoration: none; color: white">
+            <a href="{% url 'contact' %}" style="text-decoration: none; color: white">
               <li>
                 <p>Contact Us</p>
               </li>
@@ -547,16 +547,18 @@
         <div class="col-sm-4">
           <h1 style="color: white; margin-left: 0.7em">Connect With Us</h1>
           <div class="container-fluid text-center" style="display: flex; flex-direction: column">
-            <a href="#" style="text-decoration: none; color: white">
+            <a href="https://www.instagram.com/priyankaglamourforever/" style="text-decoration: none; color: white">
               <i class="fa-brands fa-instagram mx-2" style="font-size: 2em"></i>
             </a>
 
-            <a href="#" style="text-decoration: none; color: white">
+            <!-- <a href="#" style="text-decoration: none; color: white">
               <i class="fa-brands fa-twitter mx-2 mt-4" style="font-size: 2em"></i>
-            </a>
+            </a> -->
+            
             <a href="#" style="text-decoration: none; color: white">
               <i class="fa-brands fa-facebook mt-4" style="font-size: 2em"></i>
             </a>
+
           </div>
         </div>
         <div class="col-sm-4"></div>
@@ -564,6 +566,14 @@
     </div>
   </div>
 </div>
+{% if messages %}
+          <ul class="messages" style="display: none;">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }} alert alert-primary" {% endif %} id="messs">{{ message }}
+              </li>
+              {% endfor %}
+          </ul>
+          {% endif %}
 
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -614,6 +624,12 @@
       },
     });
   </script>
+</body>
+</script>
+<script>
+  var message = document.getElementById("messs").innerHTML
+  alert(message)
+</script>
 </body>
 
 </html>                                                                                            

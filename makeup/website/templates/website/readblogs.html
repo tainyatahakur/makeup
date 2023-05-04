@@ -1,0 +1,52 @@
+{%extends 'website/homepage.html'%}
+
+{% block title %}
+<title>{{blogs.title}}</title>
+{% endblock title %}
+
+{% block meta %}
+  <meta name="keywords" content='blogs, coding india, html, python, css, SQL, Javascript, How to, Data Science, Data Science with Python, coding, programming, Tips, Learn to code, AI, ML, Tutorials, Codes, Courses, Learning'>
+  <meta name="description" content="Coding india Blog page is one where you can read blogs on different topics like Data Science, machine Learning AI etc.">
+{% endblock meta %}
+
+
+{% block content %}
+<section class="mt-3">
+  <div class="readhead container">
+    <div class="row blogwidth">
+      <div class="col-md-8">
+        <!-- <h5 class="pb-4 mb-4 fst-italic border-bottom">
+                by Codin India
+              </h5> -->
+
+        <article class="blog-post">
+            <p>{{i}}</p>
+          <h1 class="blog-post-title" style="color: white">{{blogs.title}}</h1>
+          <p class="blog-post-meta" style="color: white">{{blogs.pub_date}} <a href="#"></a></p>
+          <hr style="color: white">
+
+          <span style="color: white">{{blogs.content|safe}}</span>
+        </article>
+          <!-- {{blogs.tags|safe}} -->
+
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">About Us</h4>
+          <p class="mb-0">At Priyanka Glamorous Forever, we believe that every person deserves to feel beautiful and confident in their own skin. Our mission is to empower individuals to express their unique style through the art of makeup. Our team of expert makeup artists are passionate about enhancing natural beauty and creating glamorous looks that make you feel your best. We strive to provide high-quality products and personalized services that cater to your individual needs. Whether you're a makeup enthusiast or just starting out, we're here to help you achieve your desired look. Join us on this glamorous journey and let's create a beautiful world together!</p>
+        </div>
+
+
+        <div class="p-4">
+          <h4 class="fst-italic">Contact Us</h4>
+          <ol class="list-unstyled">
+            
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock content %}

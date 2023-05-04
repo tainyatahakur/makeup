@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% load widget_tweaks %}
+
+
+{% block content %}
+
+<div class="container">
+    <h1 class="text-center text-success" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: 600;">Add BlogPost</h1>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            {% render_field form.title class="form-control" id="title" %}
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="textfield">Content</label>
+            {% render_field form.content class="form-control" id="textfield" %}
+            {{form.media}}
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="img">Cover Image</label>
+            {% render_field form.img class="form-control" id="img" %}
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="category">Category</label>
+            {% render_field form.category class="form-control" id="category" %}
+        </div>
+        
+        <div class="form-group mt-3">
+            <label for="sub_category">Sub Category</label>
+            {% render_field form.sub_category class="form-control" id="sub_category" %}
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="author">Author</label>
+            {% render_field form.author class="form-control" id="author" %}
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="readtime">Time for reading</label>
+            {% render_field form.readtime class="form-control" id="readtime" min="1" %}
+        </div>
+
+        <input type="submit" class="mt-4 mb-4 btn btn-outline-success" style="margin: 0 50%;">
+
+</div>
+
+{% endblock content %}
+</body>
+</html>

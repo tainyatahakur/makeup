@@ -26,8 +26,11 @@ SECRET_KEY = 'django-insecure-b)(c1z$$7&v-fji2#ve%66b_-t=+tl8d47zkp0@rd$2$w@9i4_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.29.90', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.29.87', '127.0.0.1']
 
+
+LOGIN_URL = 'signin'
+LOGIN_REDIRECT_URL = 'booking'
 
 # Application definition
 
@@ -39,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

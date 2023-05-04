@@ -11,11 +11,14 @@ from website.forms import BookingForm
 from website.models import ServicesModel
 from website.forms import ServicesForm, AppointmentForm
 from django.http import HttpResponse
-import random  
+import random
 from django.core.mail import send_mail
 from django.core import serializers
 from website.forms import CreateUserForm
 from django.http import JsonResponse
+from website.models import AddBlog, CustomUser
+from website.forms import AddBlogForm, CustomUserForm
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -35,22 +38,24 @@ def index(request):
     context = {'results': results, 'query': search}
     return render(request, 'website/index.html')
 
+
 def homepage(request):
-    results = ""
-    search = ""
-    if request.method == "POST":
-        search = request.POST.get('search')
-        print("Search: ", search)
+    # results = ""
+    # search = ""
+    if request.method == "GET":
+        search = request.GET.get('abc')
+        print("Searched: ", search)
         # query = request.POST.get('search')
         if search:
             searchres = ServicesModel.objects.filter(name__icontains=search)
             datas = serializers.serialize("json", searchres)
-            print("res: ", results)
+            # print("res: ", results)
             return render(request, 'website/search.html', {'datas': datas})
         else:
             data = None
-    context = {'results': results, 'query': search}
-    return render(request, 'website/homepage.html')
+    context = {}
+    return render(request, 'website/homepage.html', context)
+
 
 def contact(request):
     form = ContactForm()
@@ -60,47 +65,72 @@ def contact(request):
         if form.is_valid():
             form.save()
             print("Form Saved")
-            # return redirect("/")
+            messages.success(request, 'Contact Us Successfully')
+
+            return redirect("homepage")
         else:
             print("Form Error: ", form.errors)
     context = {'form': form, }
-    
+
     return render(request, 'website/contact.html', context)
 
 
-def Signup(request):
+def signup(request):
     form = CreateUserForm()
+    customform = CustomUserForm()
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        address1 = request.POST.get('address1')
+        address2 = request.POST.get('address2')
+        contact1 = request.POST.get('contact1')
+        contact2 = request.POST.get('contact2')
+        dod = request.POST.get('dod')
+        print("Dod: ", dod)
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip = request.POST.get('zip')
+        otp = request.POST.get('otp')
+        print('otp', otp)
+        print('username: ', username)
+        user = authenticate(email=email, password1=password1, password2=password2, address1=address1, dod=dod,
+                            address2=address2, contact1=contact1, contact2=contact2, city=city, state=state, zip=zip)
 
-    username = request.POST.get('username')
-    email = request.POST.get('email')
-    password1 = request.POST.get('password1')
-    password2 = request.POST.get('password2')
-    print(username)
-    print(email)
-
-    if request.method=='POST':
         form = CreateUserForm(request.POST)
+        customform = CustomUserForm(request.POST)
+        user = authenticate(request, username=username, password=password1)
 
+        print(customform)
         if form.is_valid():
-            form.save()
-            print("Form Saved")
-            user = form.cleaned_data.get("username")
-            messages.success(request, "Account created for "+ user+ " succesfully")
-            # response = JsonResponse({"success":True})
-            user = authenticate(request, username=username, password=password1)
-            if user is not None:
+            if customform.is_valid():
+                random_numbers = random.randint(111111, 999999)
+                print("Signup Done")
+                # send_mail("User Data: ", f"OTP: {random_numbers}", EMAIL_HOST_USER, [
+                #     email], fail_silently=True)
+                messages.success(request, 'Sign Up Successfully')
+                customform.save()
+                user = form.save()
                 login(request, user)
-                messages.success(request, "login successfully")
+                print("Form2 save")
                 return redirect('homepage')
-                
+                # return render(request, 'website/verification.html', {"otp": random_numbers})
+            else:
+                print("Form2 Error: ", customform.errors)
+            # form.save()
+            # print("Form Saved")
+            user = form.cleaned_data.get("username")
+            messages.success(request, "Account created for " +
+                             user + " successfully")
+            # response = JsonResponse({"success":True})
+            return redirect("homepage")                 
 
         else:
             print("Invalid Form", form.errors)
-            response = JsonResponse({"error":form.errors})
-            response.status_code = 403
-            return response
-            
-    return render(request, 'website/signup.html', {'form':form})
+            messages.success(request, form.errors)
+
+    return render(request, "website/signup.html")
 
 
 def signin(request):
@@ -116,8 +146,8 @@ def signin(request):
         if user is not None:
             login(request, user)
             messages.success(request, "login successfully")
-            return redirect('homepage')
-            
+            return redirect('booking')
+
         else:
             print("User None")
         # login(request, user)
@@ -131,7 +161,7 @@ def signin(request):
     #     print("login Done")
     #     send_mail("User Data: ", f"OTP: {random_numbers}", EMAIL_HOST_USER, [email] , fail_silently=True)
 
-        #messages.success(request, 'OTP sent successfully on your registered email')
+        # messages.success(request, 'OTP sent successfully on your registered email')
     #     if request.user.is_superuser:
     #         return redirect('dashboard')
     #     return render(request, 'website/verification.html', {"otp": random_numbers})
@@ -140,7 +170,7 @@ def signin(request):
     #     messages.error(request, "Wrong Credentials")
     #     return redirect('index')
 
-    return render(request, "website/signin.html")
+    return render(request, "website/signin.html")                
 
 
 def signout(request):
@@ -149,9 +179,12 @@ def signout(request):
     return redirect('index')
 
 
+@login_required
 def booking(request):
     form = BookingForm()
-    data= ServicesModel.objects.all()
+    user = request.user
+    userdata = CustomUser.objects.get(username=user)
+    data = ServicesModel.objects.all()
 
     if request.method == "POST":
         form = BookingForm(request.POST)
@@ -167,7 +200,7 @@ def booking(request):
         datentime = request.POST.get('datentime')
         time = request.POST.get('time')
         # time = TimingModel.objects.get(id=time)
-        
+
         # total_payment = request.POST.get('total_payment')
         # services = json.dumps(se)
         # print("Services: ", services)
@@ -177,10 +210,12 @@ def booking(request):
         if form.is_valid():
             form.save()
             print("Form Saved")
-            # return redirect("/")
+            messages.success(request, "Your Booking is done Successfully" )
+
+            return redirect("Your_booking")
         else:
             print("Form Error: ", form.errors)
-    context = {'form': form,'data': data}
+    context = {'form': form, 'data': data, 'userdata': userdata}
     return render(request, 'website/booking.html', context)
 
 
@@ -218,7 +253,7 @@ def appointment(request):
     date = request.POST.get('date')
     time = request.POST.get('time')
     # return HttpResponse('Appointment booked successfully!')
-    return render(request, 'website/appointment.html')
+    return render(request, 'website/appointment.html')   
 
 
 # def portfolio(request):
@@ -231,42 +266,39 @@ def forgot_password(request):
         print("Email: ", email)
         random_numbers = random.randint(111111, 999999)
         print("Signup Done")
-        send_mail("User Data: ", f"OTP: {random_numbers}", EMAIL_HOST_USER, [email] , fail_silently=True)
-        messages.success(request, 'OTP sent successfully on your registered email')
+        send_mail("User Data: ", f"OTP: {random_numbers}", EMAIL_HOST_USER, [
+                  email], fail_silently=True)
+        messages.success(
+            request, 'OTP sent successfully on your registered email')
         return render(request, 'website/new_password.html', {'otp': random_numbers, 'email': email})
 
-    return render(request, 'website/forgot_password.html')  
-
+    return render(request, 'website/forgot_password.html')
 
 
 def search(request):
     results = ""
-    search = ""
 
     if request.method == "POST":
         search = request.POST.get('search')
-        print("Search: ", search)
+        print("Searched: ", search)
         # query = request.POST.get('search')
         if search:
             searchres = ServicesModel.objects.filter(name__icontains=search)
             datas = serializers.serialize("json", searchres)
-            print("res: ", results)
+            # print("res: ", results)                                       -
             return render(request, 'website/search.html', {'datas': datas})
         else:
             data = None
-    context = {'results': results, 'query': search}
-    # return render(request, 'home/search.html', context)
-    # return render(request, 'website/search.html', context)
-    # return JsonResponse(data, safe=False)
-    return render(request, 'website/search.html', {'result': data})
+    # context = {'results': results, 'query': search}
 
+    return render(request, 'website/search.html')                   
 
 
 def GetBookingDatentime(request):
     if request.method == "POST":
         date = request.POST.get("date")
         # time = request.POST.get("time")
-    
+
         print("Date: ", date)
         # print("Time: ", time)
         times = BookingModel.objects.filter(datentime=date)
@@ -293,17 +325,48 @@ def GetBookingDatentime(request):
         if BookingModel.objects.filter(datentime=date).exists():
             amount = "Time Slot is already Taken"
             print(amount)
-            return JsonResponse({'amount' : amount, 'times': bookingTimes}, status=200)
+            return JsonResponse({'amount': amount, 'times': bookingTimes}, status=200)
 
         else:
             amount = "Ready To Go"
             print(amount)
-            return JsonResponse({'amount' : amount, 'times': bookingTimes}, status=200)
+            return JsonResponse({'amount': amount, 'times': bookingTimes}, status=200)
     else:
         amount = "Ready To Go"
-        return JsonResponse({'amount' : amount}, status=200)
+        return JsonResponse({'amount': amount}, status=200)
+
 
 def Your_booking(request):
-    data= BookingModel.objects.all()
-    context = {'data':data}
-    return render(request,'website/your_booking.html', context)
+    data = BookingModel.objects.filter(username=request.user.username)
+    context = {'data': data}
+    return render(request, 'website/your_booking.html', context)
+
+
+def addblog(request):
+    form = AddBlogForm()
+
+    if request.method == "POST":
+        form = AddBlogForm(request.POST, request.FILES)
+
+        title = request.POST['title']
+        if AddBlog.objects.filter(title=title).exists():
+            raise Exception("Blog Title Already Exists")
+
+        if form.is_valid():
+            form.save()
+            # return redirect("blogs_index")
+
+    context = {'form': form}
+    return render(request, 'website/addblog.html', context)
+
+
+def AllBlogs(request):
+    blog = AddBlog.objects.all()
+    context = {'blog': blog}
+    return render(request, 'website/blogs.html', context)
+
+
+def Readblog(request, id):
+    blogs = AddBlog.objects.get(id=id)
+    read = {'blogs': blogs}
+    return render(request, 'website/readblogs.html', read)

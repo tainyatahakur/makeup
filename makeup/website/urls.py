@@ -6,7 +6,7 @@ path('', views.index, name="index" ),
 path('homepage/' ,views.homepage, name = 'homepage') ,
 path('contact/', views.contact, name ='contact'),
 path('signin/', views.signin, name = 'signin'),
-path('signup/', views.Signup, name = 'signup'),
+path('signup/', views.signup, name = 'signup'),
 path('signout/', views.signout, name = 'signout'),
 path('booking/', views.booking, name ='booking'),
 # path('search/', views.search, name = 'search'),
@@ -17,6 +17,14 @@ path('forgot-password/', views.forgot_password, name='forgot_password'),
 path('Search/', views.search, name ='Search'),
 path('GetBookingDatentime/', views.GetBookingDatentime, name = 'GetBookingDatentime'),
 path('Your_booking/', views.Your_booking, name = 'Your_booking'),
+path('blogs/', views.addblog, name = 'blogs'),
+path('Allblogs/', views.AllBlogs, name = 'allblogs'),
+path('readblog/<int:id>/', views.Readblog, name="readblog"),
+
+
+
 
 
 ]       
+
+

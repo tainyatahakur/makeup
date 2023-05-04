@@ -4,6 +4,9 @@ from website.models import BookingModel
 from website.models import ServicesModel, AppointmentModel
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import AddBlog
+from website.models import CustomUser
+
 
 
 
@@ -34,5 +37,14 @@ class CreateUserForm(UserCreationForm):
         fields = ["username","email","password1", 'password2']
 
 
+class AddBlogForm(ModelForm):
+    class Meta:
+        model = AddBlog
+        fields = "__all__"
 
 
+class CustomUserForm(ModelForm):
+    # phone_no = forms.CharField(max_length = 10)
+    class Meta:
+        model = CustomUser
+        fields = ["fname", "lname", "username","email","password1", "password2", "address1", "address2", "contact1", "contact2", "city", "state", "zip", 'dod']

@@ -47,6 +47,15 @@
   }
 </style>
 </head>
+<body>
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }} alert alert-primary" {% endif %} id="messs">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 
 <div class="main mx-auto"
   style="margin-top: -5em; background-image: url({% static 'images/1.jpg' %}); background-attachment: fixed; background-size: cover;">
@@ -87,42 +96,45 @@
               <form class="row g-3 needs-validation mt-4" novalidate action="" method="POST">
                 {% csrf_token %}
 
+                <input type="hidden" name="username" value="{{user.username}}">
                 <div class="col-md-4">
                   <label for="validationCustom01" class="form-label">First name</label>
-                  <input type="text" class="form-control" id="validationCustom01" name="fname" required />
+                  <input type="text" class="form-control" id="validationCustom01" name="fname" required value="{{userdata.fname}}" />
 
                 </div>
                 <div class="col-md-4">
                   <label for="validationCustom02" name='lname' class="form-label">Last name</label>
-                  <input type="text" class="form-control" id="validationCustom02" name="lname" required />
+                  <input type="text" class="form-control" id="validationCustom02" name="lname" required value="{{userdata.lname}}" />
 
                 </div>
                 <div class="col-md-4">
                   <label for="Contact" class="form-label">Phone Number</label>
 
                   <input type="text" id="phone" placeholder="Phone Number" class="form-control"
-                    style="border: 1px solid rgb(216, 215, 215);" name="phone" />
+                    style="border: 1px solid rgb(216, 215, 215);" name="phone" value="{{userdata.contact1}}" />
                 </div>
                 <div class="col-md-12">
                   <label for="validationCustom03" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="validationCustom03" name="address" required />
+                  <input type="text" class="form-control" id="validationCustom03" name="address" required value="{{userdata.address1}}" />
 
                 </div>
 
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">State</label>
-                  <select onchange="print_city('state', this.selectedIndex);" id="sts" name="state" class="form-control"
-                    style="border: 1px solid rgb(216, 215, 215)" ; required></select>
+                  <!-- <select onchange="print_city('state', this.selectedIndex);" id="sts" name="state" class="form-control" required value="{{userdata.state}}"  -->
+                    <!-- style="border: 1px solid rgb(216, 215, 215)" ; ></select> -->
+                    <input type="text" value="{{userdata.state}}" class="form-control" name="state"> 
                 </div>
 
                 <div class="col-md-3">
                   <label for="inputState" class="form-label">City</label>
-                  <select id="state" name="city" class="form-control" required></select>
+                  <!-- <select id="state" name="city" class="form-control" required></select value="{{userdata.city}}" -->
+                    <input type="text" value="{{userdata.city}}" class="form-control" name="city">
                 </div>
 
                 <div class="col-md-3">
                   <label for="validationCustom05" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="validationCustom05" name="zip"
+                  <input type="text" class="form-control" id="validationCustom05" name="zip" value="{{userdata.zip}}"
                     style="border: 1px solid rgb(216, 215, 215)" ; required />
                 </div>
 
@@ -148,12 +160,15 @@
                   <select class="form-select" aria-label="Default select example" name="services">
                     <option selected>Open this select menu</option>
 
-                    <option value="Makeup">Makeup</option>
+                    <!-- <option value="Makeup">Makeup</option>
                     <option value="HD Makeup">HD Makeup</option>
                     <option value="Matte Makeup">Matte Makeup</option>
                     <option value="Airbrush Makeup">Airbrush Makeup</option>
-                    <option value="Glass Makeup">Glass Makeup</option>
+                    <option value="Glass Makeup">Glass Makeup</option> -->
+                    {% for i in data %}
+                    <option value="{{i.id}}">{{i.name}} Rs.{{i.prices}}</option>
 
+                    {% endfor %}
                   </select>
 
 
@@ -215,31 +230,31 @@
             console.log("radio Value: ", this.value)
             if (this.value == "10:00-11:00") {
               console.log("10:00-11:00")
-              $('#time').val(1)
+              $('#time').val(7)
             }
             if (this.value == "11:00-12:00") {
               console.log("11 AM DONE")
-              $('#time').val(2)
+              $('#time').val(8)
             }
             if (this.value == "1:00-2:00") {
               console.log("12 PM DONE")
-              $('#time').val(3)
+              $('#time').val(9)
             }
             if (this.value == "2:00-3:00") {
               console.log("01 PM DONE")
-              $('#time').val(4)
+              $('#time').val(10)
             }
             if (this.value == "3:00-4:00") {
               console.log("02 PM DONE")
-              $('#time').val(5)
+              $('#time').val(11)
             }
             if (this.value == "4:00-5:00") {
               console.log("03 PM DONE")
-              $('#time').val(6)
+              $('#time').val(12)
             }
             if (this.value == "5:00-6:00") {
               console.log("04 PM DONE")
-              $('#time').val(7)
+              $('#time').val(13)
             }
             if (this.value == "05 PM") {
               console.log("05 PM DONE")
@@ -296,6 +311,10 @@
       });
     </script> -->
 {% endblock content %}
+<script>
+  var message = document.getElementById("messs").innerHTML
+  alert(message)
+</script>
 </body>
 
-</html>
+</html>                           

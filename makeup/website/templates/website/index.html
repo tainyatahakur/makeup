@@ -15,17 +15,17 @@
     <div class="container-fluid">
       <div class="navbar">
         <div class="site-info">
-          <img
-            src="{% static 'images/pgf.png' %}"
+          <img                                  
+            src="{% static 'images/pgf.png' %}"                             
             class="img-fluid"
-            style="height: 5em; width: auto; padding: 0%"
+            style="height: 5em; width: auto; padding: 0%"                              
           />
         </div>
         <div class="site-menu">
           <a href="{% url 'homepage' %}" style="color: white; text-decoration: none">
             <div class="menu-item">Home</div>
           </a>
-          <a
+          <a                   
             href="/html/aboutus.html"
             style="color: white; text-decoration: none"
           >
@@ -38,7 +38,7 @@
             <div class="menu-item">Services</div>
           </a>
           <a
-            href="/html/blogs.html"
+            href="{% url 'allblogs' %}"
             style="color: white; text-decoration: none"
           >
             <div class="menu-item">Blogs</div>
